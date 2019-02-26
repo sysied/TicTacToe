@@ -18,7 +18,9 @@ public class SpielZugListener implements ActionListener {
 	private Spieler aktuellerSpieler = null;
 	private Spieler zweiterSpieler = null;
 	
-	
+	/**
+	 * Standard Konstruktor der Klasse
+	 */
 	public SpielZugListener() {
 	}
 	
