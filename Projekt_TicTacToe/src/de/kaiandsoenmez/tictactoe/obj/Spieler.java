@@ -3,7 +3,7 @@ package de.kaiandsoenmez.tictactoe.obj;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Spieler implements Serializable{
+public class Spieler implements Serializable {
 
 	/* Variablendeklaration für die Klasse Spieler */
 	private String spielerName = "";

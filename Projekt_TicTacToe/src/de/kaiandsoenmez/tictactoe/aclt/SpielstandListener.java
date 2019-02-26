@@ -29,13 +29,31 @@ public class SpielstandListener implements ActionListener{
 		
 		/* Starte das Laden oder das Speichern des Spielstands */
 		if(speichern) {
-			/* Speicher den Speilstand */
+			/* Speicher den Spielstand ab */
+			Spielstand speicherStand = new Spielstand(HauptfensterUI.aktuellerSpieler, HauptfensterUI.zweiterSpieler);
 			
+			/* Nach einem Speicherort fragen */
+			JFileChooser fcSpeicherOrt = new JFileChooser();
+			fcSpeicherOrt.setDialogTitle("Bitte einen Speicherort wählen (Ordner)");
+	        fcSpeicherOrt.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+	        fcSpeicherOrt.showSaveDialog(null);
+
+	        System.out.println(fcSpeicherOrt.getCurrentDirectory());
+	        System.out.println(fcSpeicherOrt.getSelectedFile());
+	        
+	        speicherStand.speicherSpielstand(fcSpeicherOrt.getSelectedFile().toString());
+	        
+	        
 		} else {
 			/* Lade den Spielstand */
 			JFileChooser standAuswahl = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("ser");
-			standAuswahl.setFileFilter(filter);
+			standAuswahl.setDialogTitle("Bitte den Spielstand öffnen");
+			standAuswahl.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("SER-Datei", "*.ser", "ser");
+			standAuswahl.addChoosableFileFilter(filter);
+			standAuswahl.setAcceptAllFileFilterUsed(false);
+			
+			
 	        int ergebnis;
 
 	        ergebnis = standAuswahl.showOpenDialog(null);
@@ -47,7 +65,11 @@ public class SpielstandListener implements ActionListener{
 	            /* Lade den Spielstand, der ausgewählt wurde */
 	            Spielstand ladeStand = new Spielstand(file.getAbsolutePath());
 	            
-	            HauptfensterUI.aktualisiereSpielflaeche(ladeStand.getAktuellerSpieler(), ladeStand.getZweiterSpieler());
+	            HauptfensterUI.aktualisiereSpielflaeche(ladeStand.getAktuellerSpieler(), ladeStand.getZweiterSpieler()); //Überschreibt die Spielfläche mit dem Stand
+	            HauptfensterUI.setSpielerNamen(ladeStand.getAktuellerSpieler().getName(), ladeStand.getZweiterSpieler().getName());
+	            
+	            HauptfensterUI.aktuellerSpieler = ladeStand.getAktuellerSpieler();
+	            HauptfensterUI.zweiterSpieler = ladeStand.getZweiterSpieler();
 	        }
 		}
 	}

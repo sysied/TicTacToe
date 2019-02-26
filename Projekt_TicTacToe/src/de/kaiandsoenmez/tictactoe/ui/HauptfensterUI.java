@@ -44,6 +44,8 @@ public class HauptfensterUI extends JFrame {
 	public static Spieler zweiterSpieler = null;
 	public static Label lblStatus;
 	public static JPanel spielflaeche;
+	public static JTextField ipSpieler1;
+	public static JTextField ipSpieler2;
 	
 	/* Deklarieren von benötigten Variablen des JFrames */
 	GridLayout spielflaecheLayout = new GridLayout(3,3);
@@ -83,10 +85,10 @@ public class HauptfensterUI extends JFrame {
 		lblSpieler2.setFont(new Font("Arial Black", Font.PLAIN, 16));
 
 		
-		JTextField ipSpieler1 = new JTextField();
+		ipSpieler1 = new JTextField();
 		ipSpieler1.setBounds(170, 50, 240, 25);
 		
-		JTextField ipSpieler2 = new JTextField();
+		ipSpieler2 = new JTextField();
 		ipSpieler2.setBounds(170, 85, 240, 25);
 		
 		lblStatus = new Label();
@@ -108,8 +110,8 @@ public class HauptfensterUI extends JFrame {
 		JButton btnLadeStand = new JButton();
 		btnLadeStand.setText("Spiel laden");
 		btnLadeStand.setBounds(290, 495, 150, 25);
-		ActionListener speicherStandF = new SpielstandListener(false);
-		btnSpeicherStand.addActionListener(speicherStandF);
+		ActionListener ladeStand = new SpielstandListener(false);
+		btnLadeStand.addActionListener(ladeStand);
 		
 		
 		spielflaeche = new JPanel();
@@ -185,6 +187,10 @@ public class HauptfensterUI extends JFrame {
 		
 	}
 	
+	public static void setSpielerNamen(String name1, String name2) {
+		ipSpieler1.setText(name1);
+		ipSpieler2.setText(name2);
+	}
 	/**
 	 * Aktiviert alle Komponenten (TTTButtons) in dem JPane 'Spielfläche'
 	 */
@@ -203,16 +209,20 @@ public class HauptfensterUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * Aktualisiert das Spielfeld und überschreibt mit dem Fortschritt von beiden Spielern
+	 * @param kreuz Das Spielerobjekt mit dem Kreuz Symbol
+	 * @param kreis Das Spielerobjekt mit dem Kreis Symbol
+	 */
 	public static void aktualisiereSpielflaeche(Spieler kreuz, Spieler kreis) {
 		for (int feld : kreuz.getFelder()) {
+			System.out.println("Kreuz Felder: " + feld);
 			/* Lad Kreuz Spieler Stand */
 			for (Component cp : spielflaeche.getComponents() ){
 				TTTButton feldTTT = (TTTButton) cp;
 				
 				if(feld == feldTTT.getTTTNummer()) {
 					feldTTT.setTTTZustand(2);
-				} else {
-					feldTTT.setTTTZustand(0);
 				}
 		        cp.setEnabled(true);
 			}
@@ -220,13 +230,12 @@ public class HauptfensterUI extends JFrame {
 		
 		/* Lade Kreis Spieler Stand */
 		for (int feld : kreis.getFelder()) {
+			System.out.println("Kreis Felder: " + feld);
 			for (Component cp : spielflaeche.getComponents() ){
 				TTTButton feldTTT = (TTTButton) cp;
 				
 				if(feld == feldTTT.getTTTNummer()) {
 					feldTTT.setTTTZustand(1);
-				} else {
-					feldTTT.setTTTZustand(0);
 				}
 		        cp.setEnabled(true);
 			}
