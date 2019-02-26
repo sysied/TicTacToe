@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
+import de.kaiandsoenmez.tictactoe.obj.Spielstand;
 import de.kaiandsoenmez.tictactoe.obj.TTTButton;
 import de.kaiandsoenmez.tictactoe.ui.HauptfensterUI;
 import de.kaiandsoenmez.tictactoe.utils.Debug;
@@ -26,8 +27,11 @@ public class SpielZugListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/* Zu Debug Zwecken die globalen statischen Variablen im Hauptfenster ausgeben */
 		System.out.println("Der aktuelle Spieler ist " + HauptfensterUI.aktuellerSpieler.getName());
 		System.out.println("Der zweite Spieler ist " + HauptfensterUI.zweiterSpieler.getName());
+		
+		
 		/* Speicher die 2 Spieler Objekte in der Klasse für einen Tausch nach dem Zug */
 		this.aktuellerSpieler = HauptfensterUI.aktuellerSpieler;
 		this.zweiterSpieler = HauptfensterUI.zweiterSpieler;

@@ -36,7 +36,7 @@ public class SpielStartenListener implements ActionListener {
 			
 			/* Erstelle die beiden Spieler */
 			int zufallsZahl = zufall.nextInt(50); //Generiert eine Zufallszahl zwischen 1 - 49
-			if(zufallsZahl >= 25) {
+			if(zufallsZahl >= 25) { /* Wenn der Zufallswert größer gleih 25 ist, wird der Spieler per Zufall gewechselt */
 				System.out.println("Speieler 1 beginnt...");
 				spieler1Startet = true;
 				HauptfensterUI.lblStatus.setText("Spieler " + i1.getText() + " hat X und den ersten Zug!");
@@ -46,6 +46,7 @@ public class SpielStartenListener implements ActionListener {
 				Spieler ersterSpieler = new Spieler(i1.getText(), true);
 				Spieler zweiterSpieler = new Spieler(i2.getText(), false);
 
+				/* Setzt die Spieler des aktuellen Spiels im Hauptfenster */
 				HauptfensterUI.aktuellerSpieler = ersterSpieler;
 				HauptfensterUI.zweiterSpieler = zweiterSpieler;
 				
@@ -62,6 +63,7 @@ public class SpielStartenListener implements ActionListener {
 		        HauptfensterUI.zweiterSpieler = zweiterSpieler;
 			}
 			
+			/* Aktiviert die Spielfläche und erlaubt die EIngabe */
 			HauptfensterUI.enableSpielflaeche();
 			
 		} else {

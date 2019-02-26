@@ -51,6 +51,9 @@ public class TTTButton extends JButton {
 			/* Wenn der Zustand Kreuz ist, setze für den Button das Kreuz Bild */
 			this.setText("X");
 			this.tttZustand = 2;
+		} else {
+			this.setText("");
+			this.tttZustand = 0;
 		}
 	}
 	

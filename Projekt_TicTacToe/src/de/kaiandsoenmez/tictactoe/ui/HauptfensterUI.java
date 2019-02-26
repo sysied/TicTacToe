@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import de.kaiandsoenmez.tictactoe.aclt.SpielStartenListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielZugListener;
+import de.kaiandsoenmez.tictactoe.aclt.SpielstandListener;
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
 import de.kaiandsoenmez.tictactoe.obj.TTTButton;
 
@@ -27,6 +28,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JSeparator;
 
+/**
+ * Diese Klasse ist für die Hauptsächliche Anzeige der des UI's zuständig 
+ * @author ksönmez, kleikam
+ *
+ */
 public class HauptfensterUI extends JFrame {
 
 	/**
@@ -53,7 +59,7 @@ public class HauptfensterUI extends JFrame {
 		setResizable(false);
 		//setAlwaysOnTop(true);
 		setTitle("TicTacToe");
-		setBounds(100, 100, 455, 529);
+		setBounds(100, 100, 455, 555);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.WHITE);
@@ -92,6 +98,18 @@ public class HauptfensterUI extends JFrame {
 		btnStartSpiel.setBounds(170, 120, 240, 25);
 		ActionListener startenListener = new SpielStartenListener(ipSpieler1, ipSpieler2);
 		btnStartSpiel.addActionListener(startenListener);
+		
+		JButton btnSpeicherStand = new JButton();
+		btnSpeicherStand.setText("Spiel speichern");
+		btnSpeicherStand.setBounds(10, 495, 150, 25);
+		ActionListener speicherStand = new SpielstandListener(true);
+		btnSpeicherStand.addActionListener(speicherStand);
+		
+		JButton btnLadeStand = new JButton();
+		btnLadeStand.setText("Spiel laden");
+		btnLadeStand.setBounds(290, 495, 150, 25);
+		ActionListener speicherStandF = new SpielstandListener(false);
+		btnSpeicherStand.addActionListener(speicherStandF);
 		
 		
 		spielflaeche = new JPanel();
@@ -144,6 +162,8 @@ public class HauptfensterUI extends JFrame {
 		getContentPane().add(btnStartSpiel);
 		getContentPane().add(spielflaeche);
 		getContentPane().add(lblStatus);
+		getContentPane().add(btnSpeicherStand);
+		getContentPane().add(btnLadeStand);
 		/* ENDE Platzieren der Objekte auf dem Frame*/
 		
 		/* Platzieren der Objekte im Spielfeld */
@@ -160,19 +180,57 @@ public class HauptfensterUI extends JFrame {
 		spielflaeche.add(r3, 2,2);
 		/* ENDE Platzieren der Objekte auf dem Spielfeld */
 		
+		/* Deaktiviert alle TTTButtons in der Spielfläche, so kann das bei der Initialisierung vermieden werden */
 		disableSpielflaeche();
 		
 	}
 	
+	/**
+	 * Aktiviert alle Komponenten (TTTButtons) in dem JPane 'Spielfläche'
+	 */
 	public static void enableSpielflaeche() {
 		for (Component cp : spielflaeche.getComponents() ){
 	        cp.setEnabled(true);
 		}
 	}
 	
+	/**
+	 * Deaktiviert alle Komponenten (TTTButtons) in dem JPane 'Spielfläche'
+	 */
 	public static void disableSpielflaeche() {
 		for (Component cp : spielflaeche.getComponents() ){
 	        cp.setEnabled(false);
 		}
+	}
+	
+	public static void aktualisiereSpielflaeche(Spieler kreuz, Spieler kreis) {
+		for (int feld : kreuz.getFelder()) {
+			/* Lad Kreuz Spieler Stand */
+			for (Component cp : spielflaeche.getComponents() ){
+				TTTButton feldTTT = (TTTButton) cp;
+				
+				if(feld == feldTTT.getTTTNummer()) {
+					feldTTT.setTTTZustand(2);
+				} else {
+					feldTTT.setTTTZustand(0);
+				}
+		        cp.setEnabled(true);
+			}
+		}
+		
+		/* Lade Kreis Spieler Stand */
+		for (int feld : kreis.getFelder()) {
+			for (Component cp : spielflaeche.getComponents() ){
+				TTTButton feldTTT = (TTTButton) cp;
+				
+				if(feld == feldTTT.getTTTNummer()) {
+					feldTTT.setTTTZustand(1);
+				} else {
+					feldTTT.setTTTZustand(0);
+				}
+		        cp.setEnabled(true);
+			}
+		}
+		
 	}
 }

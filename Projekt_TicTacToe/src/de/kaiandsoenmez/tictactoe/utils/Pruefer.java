@@ -70,11 +70,12 @@ public class Pruefer {
 		if(feldNummern.contains(1) && feldNummern.contains(5) && feldNummern.contains(9)) {
 			return true;
 		}
-		
+		/* Überprüft auf Queren Treffer, Rechts Oben, Mitte, Links Unten */
 		if(feldNummern.contains(3) && feldNummern.contains(5) && feldNummern.contains(7)) {
 			return true;
 		}
 		
+		/* Wenn kein Sieg, gebe false zurück */
 		return false;
 	}
 }
