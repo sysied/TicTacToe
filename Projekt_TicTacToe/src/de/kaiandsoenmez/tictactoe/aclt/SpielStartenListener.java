@@ -18,7 +18,6 @@ public class SpielStartenListener implements ActionListener {
 	JTextField i2 = null;
 	//Label status = null;
 	Random zufall = new Random();
-	boolean spieler1Startet = false;
 	
 	/**
 	 * Der Standard Konstruktor dieses ActionListeners 
@@ -35,40 +34,38 @@ public class SpielStartenListener implements ActionListener {
 		if(Pruefer.pruefeInputText(i1) && Pruefer.pruefeInputText(i2)) {
 			
 			/* Erstelle die beiden Spieler */
+			Spieler ersterSpieler = null;
+			Spieler zweiterSpieler = null;
+			
+			
 			int zufallsZahl = zufall.nextInt(50); //Generiert eine Zufallszahl zwischen 1 - 49
 			if(zufallsZahl >= 25) { /* Wenn der Zufallswert größer gleih 25 ist, wird der Spieler per Zufall gewechselt */
-				System.out.println("Speieler 1 beginnt...");
-				spieler1Startet = true;
-				HauptfensterUI.lblStatus.setText("Spieler " + i1.getText() + " hat X und den ersten Zug!");
-				HauptfensterUI.lblStatus.repaint();
 				
 				/* Erstelle den ersten Spieler und weise es der Statischen Variable im Hauptfenster zu */
-				Spieler ersterSpieler = new Spieler(i1.getText(), true);
-				Spieler zweiterSpieler = new Spieler(i2.getText(), false);
+				ersterSpieler = new Spieler(i1.getText(), true);
+				zweiterSpieler = new Spieler(i2.getText(), false);
 
-				/* Setzt die Spieler des aktuellen Spiels im Hauptfenster */
-				HauptfensterUI.aktuellerSpieler = ersterSpieler;
-				HauptfensterUI.zweiterSpieler = zweiterSpieler;
-				
 			} else {
-				System.out.println("Spieler 2 beginnt...");
-				HauptfensterUI.lblStatus.setText("Spieler " + i2.getText() + " hat X und den ersten Zug!");
-				HauptfensterUI.lblStatus.repaint();
 				
 				/* Erstelle den ersten Spieler und weise es der Statischen Variable im Hauptfenster zu */
-				Spieler ersterSpieler = new Spieler(i2.getText(), true);
-				Spieler zweiterSpieler = new Spieler(i1.getText(), false);
+				ersterSpieler = new Spieler(i2.getText(), true);
+				zweiterSpieler = new Spieler(i1.getText(), false);
 
-				HauptfensterUI.aktuellerSpieler = ersterSpieler;
-		        HauptfensterUI.zweiterSpieler = zweiterSpieler;
 			}
+			
+			/* Benachrichtige den Benutzer, wer anfängt */
+			HauptfensterUI.lblStatus.setText(ersterSpieler.getName() + " hat X und beginnt");
+			
+			/* Weist den globalen statischen Variablen im Hauptfenster die Spieler zu */
+			HauptfensterUI.aktuellerSpieler = ersterSpieler;
+			HauptfensterUI.zweiterSpieler = zweiterSpieler;
 			
 			/* Aktiviert die Spielfläche und erlaubt die EIngabe */
 			HauptfensterUI.enableSpielflaeche();
 			
 		} else {
 			/* Werfe eine Fehlermeldung, die dem Benutzer signalisiert, dass kein Text für den Spieler eingegeben wurde */
-			Debug.fehlermeldung("Bitte geben Sie Spielernamen ein!");
+			Debug.fehlermeldung("Bitte geben Sie beide Spielernamen ein!");
 			return;
 		}
 		

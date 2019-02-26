@@ -47,9 +47,9 @@ public class SpielZugListener implements ActionListener {
 			}
 			
 			if(setzeX) {
-				klick.setTTTZustand(2);
+				klick.setTTTZustand(2); //Setzt den Zustand vom Feld auf X
 			} else {
-				klick.setTTTZustand(1);
+				klick.setTTTZustand(1); //Setzt den Zustand vom Feld auf o
 			}
 			
 			/* Setze dem aufrufendem Spieler einen Zug */
@@ -59,7 +59,7 @@ public class SpielZugListener implements ActionListener {
 			
 			/* Prüfe Gewinner ab */
 			if(Pruefer.pruefeGewonnen(aktuellerSpieler)) {
-				HauptfensterUI.lblStatus.setText("Der Spieler " + aktuellerSpieler.getName() + " hat gewonnen!");
+				HauptfensterUI.lblStatus.setText(aktuellerSpieler.getName() + " hat gewonnen!");
 				HauptfensterUI.disableSpielflaeche();
 				return;
 			}
@@ -75,7 +75,7 @@ public class SpielZugListener implements ActionListener {
 			HauptfensterUI.aktuellerSpieler = zweiterSpieler;
 			HauptfensterUI.zweiterSpieler = aktuellerSpieler;
 			
-			HauptfensterUI.lblStatus.setText("Der Spieler " + zweiterSpieler.getName() + " ist am Zug! ");
+			HauptfensterUI.lblStatus.setText(zweiterSpieler.getName() + " ist am Zug! ");
 			
 		} else {
 			/* Das Feld hat schon einen Wert */
