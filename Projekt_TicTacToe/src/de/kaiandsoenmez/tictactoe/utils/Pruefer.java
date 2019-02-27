@@ -59,7 +59,7 @@ public class Pruefer {
 		
 		/* Überprüfen auf Verticale Gewinnreihenfolge */
 		for(int i = 0; i <= 2; i++) {
-			System.out.println("Prüfung auf " + pruefer1 + " & " + pruefer2 + " & " + pruefer3);
+			//System.out.println("Prüfung auf " + pruefer1 + " & " + pruefer2 + " & " + pruefer3);
 			if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
 					return true;
 			}
@@ -153,8 +153,7 @@ public class Pruefer {
 	 * @return Gibt die Nummer des besten TTTButton Feldes zurück 
 	 */
 	public static int getBesterZug(Spieler spieler, JPanel spielfeld) {
-		ArrayList<Integer> feldNummern = spieler.getFelder(); //Lädt die gewählten Felder eines Spielers
-		
+		/* Gehe über jedes Feld und suche die leeren Felder */
 		for(int i = 0; i <= 8; i++) {
 			if(pruefeTTTButton(i, spielfeld)) return i;
 		}

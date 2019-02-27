@@ -40,10 +40,8 @@ public class SpielZugListener implements ActionListener {
 		if(klick.getTTTZustand() <= 0) {
 			/* Das Feld */
 			if(HauptfensterUI.aktuellerSpieler.getHatX()) {
-				System.out.println("Hat X");
 				setzeX = true;
 			} else {
-				System.out.println("Hat X nicht");
 				setzeX = false;
 			}
 			
@@ -74,18 +72,19 @@ public class SpielZugListener implements ActionListener {
 				return;
 			}
 			
-			/* Ändere die Zugreihenfolge im Hauptfenster */
-			System.out.println("Hautfenster-Aktueller Spieler wird auf " + zweiterSpieler.getName() + " gestezt");
-			System.out.println("Hautfenster-Zweiter Spieler wird auf " + aktuellerSpieler.getName() + " gestezt");
+			
+			//System.out.println("Hautfenster-Aktueller Spieler wird auf " + zweiterSpieler.getName() + " gestezt");
+			//System.out.println("Hautfenster-Zweiter Spieler wird auf " + aktuellerSpieler.getName() + " gestezt");
 
+			/* Ändere die Zugreihenfolge im Hauptfenster */
 			HauptfensterUI.aktuellerSpieler = zweiterSpieler;
 			HauptfensterUI.zweiterSpieler = aktuellerSpieler;
 			
 			/* Informiere den benutzer über den Unentschieden Status */
 			HauptfensterUI.lblStatus.setText(zweiterSpieler.getName() + " ist am Zug! ");
 			
+			/* Wenn der Computer als nächstes am Zug ist */
 			if(zweiterSpieler.getName().equals("Computer")) {
-				System.out.println("Starte Bot im Zug-Listener -----------");
 				Bot pc = new Bot(zweiterSpieler.getName(), false);
 				pc.macheZug(HauptfensterUI.spielflaeche);
 			}

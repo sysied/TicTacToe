@@ -16,19 +16,23 @@ public class SpielerAuswahlListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		
-		JComboBox auswahlBox = (JComboBox) arg0.getSource();
-		
-		if(auswahlBox.getSelectedIndex() == 1 ) {
-			HauptfensterUI.computerSpiel = true;
-			HauptfensterUI.ipSpieler2.setText("Computer");
-			HauptfensterUI.ipSpieler2.setEnabled(false);
+		try {
+			JComboBox auswahlBox = (JComboBox) arg0.getSource();
 			
-		} else  if(auswahlBox.getSelectedIndex() == 0) {
-			HauptfensterUI.computerSpiel = false;
-			HauptfensterUI.ipSpieler2.setText("");
-			HauptfensterUI.ipSpieler2.setEnabled(true);
+			if(auswahlBox.getSelectedIndex() == 1 ) {
+				HauptfensterUI.computerSpiel = true;
+				HauptfensterUI.ipSpieler2.setText("Computer");
+				HauptfensterUI.ipSpieler2.setEnabled(false);
+				
+			} else  if(auswahlBox.getSelectedIndex() == 0) {
+				HauptfensterUI.computerSpiel = false;
+				HauptfensterUI.ipSpieler2.setText("");
+				HauptfensterUI.ipSpieler2.setEnabled(true);
+			}
+		} catch(Exception e) {
+			System.out.println("Fehler aufgetreten " + e.getMessage());
 		}
+		
 	}
 
 }

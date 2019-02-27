@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import de.kaiandsoenmez.tictactoe.obj.Bot;
@@ -31,9 +32,20 @@ public class SpielStartenListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		
+		/* Caste aus dem ActionEvent um  auf den Button zuzugreifen */
+		JButton spielStartenButton = (JButton) arg0.getSource();
+		
+		/* Prüfen ob ein Spiel läuft und beendet werden muss */
+		if(HauptfensterUI.laufendesSpiel) {
+			HauptfensterUI.laufendesSpiel = false;
+			spielStartenButton.setText("Spiel starten");
+			HauptfensterUI.leereSpielflaeche();
+			return;
+		}
+		
 		/* Überprüfen ob beide Speieler eingegeben wurden */
 		if(Pruefer.pruefeInputText(i1) && Pruefer.pruefeInputText(i2)) {
-			System.out.println("Spiel Starten Listener ----");
 			/* Erstelle die beiden Spieler */
 			Spieler ersterSpieler = null;
 			Spieler zweiterSpieler = null;
@@ -61,17 +73,16 @@ public class SpielStartenListener implements ActionListener {
 			HauptfensterUI.aktuellerSpieler = ersterSpieler;
 			HauptfensterUI.zweiterSpieler = zweiterSpieler;
 			
+			HauptfensterUI.enableSpielflaeche();
+			
 			if(HauptfensterUI.aktuellerSpieler.getName().equals("Computer")) {
-				System.out.println("Computer ist der aktuelle Spieler");
-				System.out.println("Computer macht Zug");
 				Bot pc = new Bot(ersterSpieler.getName(), true);
 				pc.macheZug(HauptfensterUI.spielflaeche);
-			} else {
-				/* Aktiviert die Spielfläche und erlaubt die EIngabe */
-				HauptfensterUI.enableSpielflaeche();
-				System.out.println("Benutzer startet das Spiel");
-				
 			}
+			
+			/* Ändere die Funktion des Buttons um, um das Spiel zu beenden */
+			HauptfensterUI.laufendesSpiel = true;
+			spielStartenButton.setText("Spiel beenden");
 			
 		} else {
 			/* Werfe eine Fehlermeldung, die dem Benutzer signalisiert, dass kein Text für den Spieler eingegeben wurde */

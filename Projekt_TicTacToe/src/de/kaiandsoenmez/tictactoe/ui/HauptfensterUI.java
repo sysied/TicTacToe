@@ -48,7 +48,9 @@ public class HauptfensterUI extends JFrame {
 	public static JPanel spielflaeche;
 	public static JTextField ipSpieler1;
 	public static JTextField ipSpieler2;
+	public static JComboBox<?> auswahl;
 	public static boolean computerSpiel = false;
+	public static boolean laufendesSpiel = false;
 	
 	/* Deklarieren von benötigten Variablen des JFrames */
 	GridLayout spielflaecheLayout = new GridLayout(3,3);
@@ -88,11 +90,11 @@ public class HauptfensterUI extends JFrame {
 		lblSpieler2.setFont(new Font("Arial Black", Font.PLAIN, 16));
 
 		String spielerAuswahl[] = {"Spieler 2", "Computer" };
-		JComboBox<?> bundeslandAuswahl = new JComboBox(spielerAuswahl);
-		bundeslandAuswahl.setSelectedIndex(0);
-		bundeslandAuswahl.setBounds(10, 85, 100, 25);
+		auswahl = new JComboBox(spielerAuswahl);
+		auswahl.setSelectedIndex(0);
+		auswahl.setBounds(10, 85, 100, 25);
 		ActionListener wahlListeer = new SpielerAuswahlListener();
-		bundeslandAuswahl.addActionListener(wahlListeer);
+		auswahl.addActionListener(wahlListeer);
 		
 		ipSpieler1 = new JTextField();
 		ipSpieler1.setBounds(170, 50, 240, 25);
@@ -169,7 +171,7 @@ public class HauptfensterUI extends JFrame {
 		getContentPane().add(trenner);
 		getContentPane().add(lblSpieler1);
 		//getContentPane().add(lblSpieler2);
-		getContentPane().add(bundeslandAuswahl);
+		getContentPane().add(auswahl);
 		getContentPane().add(ipSpieler1);
 		getContentPane().add(ipSpieler2);
 		getContentPane().add(btnStartSpiel);
@@ -251,6 +253,31 @@ public class HauptfensterUI extends JFrame {
 		        cp.setEnabled(true);
 			}
 		}
-		
 	}
+	
+	/**
+	 * Diese Methode leert das Spielfeld und setzt alle Objekte zurück 
+	 */
+	public static void leereSpielflaeche() {
+		/* Leere TicTacToe Felder */
+		for (Component cp : spielflaeche.getComponents() ){
+			TTTButton feldTTT = (TTTButton) cp;
+			
+			if(feldTTT.getTTTZustand() >= 0) {
+				feldTTT.setTTTZustand(0);
+			}
+		}
+		
+		/* Leere TicTacToe Spielernamen */
+		ipSpieler1.setText("");
+		ipSpieler2.setText("");
+		lblStatus.setText("");
+		auswahl.setSelectedIndex(0);
+		
+		/* Objekte im Hauptfenster auf null setzen */
+		aktuellerSpieler = null;
+		zweiterSpieler = null;
+	}
+	
+	
 }

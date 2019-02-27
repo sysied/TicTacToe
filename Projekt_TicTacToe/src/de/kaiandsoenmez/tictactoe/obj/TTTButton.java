@@ -65,6 +65,10 @@ public class TTTButton extends JButton {
 		return this.tttNummer;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTTTZustand() {
 		return this.tttZustand;
 	}
