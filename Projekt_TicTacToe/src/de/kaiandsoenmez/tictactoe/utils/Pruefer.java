@@ -90,6 +90,13 @@ public class Pruefer {
 	public static int kannGewinnen(Spieler spieler) {
 		ArrayList<Integer> feldNummern = spieler.getFelder(); //Lädt die gewählten Felder eines Spielers
 		
+		System.out.println("Kann Gewinnen Prüfung für Spieler " + spieler.getName() + " -----");
+		for(int zahl : feldNummern) {
+			System.out.println("Zahl: " + zahl);
+		}
+		System.out.println("-------------------");
+		
+		
 		/* Variablen für die Schleife der Horizontalen und Verticalen  prüfung */
 		int pruefer1 = 1;
 		int pruefer2 = 2;
@@ -97,7 +104,8 @@ public class Pruefer {
 		
 		/* Überprüfen auf Horizontale Gewinnmöglichkeit */
 		for(int i = 0; i <= 2; i++) {
-			if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
+		//	if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
+				System.out.println("Prüfung ");
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
 					return pruefer3; //Zeile wird mit 3 beendet
 				}
@@ -107,7 +115,7 @@ public class Pruefer {
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
 					return pruefer2; //Zeile wird mit 2 beendet
 				}
-			}
+		//	}
 			
 			/* Zähle die Variablen hoch, Überprüfe somit die nächste Zeile */
 			pruefer1 += 3;
@@ -123,7 +131,7 @@ public class Pruefer {
 		
 		/* Überprüfen auf Verticale Gewinnmöglichkeit */
 		for(int i = 0; i <= 2; i++) {
-			if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
+			//if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
 					return pruefer3; //Zeile wird mit 3 beendet
 				}
@@ -133,7 +141,7 @@ public class Pruefer {
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
 					return pruefer2; //Zeile wird mit 2 beendet
 				}
-			}
+		//	}
 			
 			/* Zähle die Variablen hoch, Überprüfe somit die nächste Zeile */
 			pruefer1 += 1;
@@ -141,6 +149,18 @@ public class Pruefer {
 			pruefer3 += 1;
 			
 		} //ENDE For-Each
+		
+		/* Prüfe auf Diagonale Gewinne */
+		if(feldNummern.contains(1) && feldNummern.contains(5)) {
+			return 9; //Zeile wird mit 3 beendet
+		}
+		if(feldNummern.contains(1) && feldNummern.contains(9)) {
+			return 5; //Zeile wird mit 3 beendet
+		}
+		if(feldNummern.contains(9) && feldNummern.contains(5)) {
+			return 1; //Zeile wird mit 3 beendet
+		}
+		
 		
 		/* Wenn keine Gewinnmöglichkeit ermittelt wurde wird 0 zurück gegeben */
 		return 0;

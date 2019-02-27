@@ -28,7 +28,7 @@ public class Bot {
 	 * Das JPanel ist die aktuelle Referenz auf das Fahrwerk
 	 */
 	public void macheZug(JPanel spielfeld) {
-		
+		System.out.println("Computer ist am ZUG");
 		/* 1. Auf eigenen Siegzug prüfen */
 		int gewinnZug = Pruefer.kannGewinnen(HauptfensterUI.aktuellerSpieler);
 		
@@ -44,7 +44,7 @@ public class Bot {
 		int gewinnZugGegner = Pruefer.kannGewinnen(HauptfensterUI.zweiterSpieler); //Der zweite Spieler ist wenn der Bot an der Reihe ist der Spieler
 		
 		if(gewinnZugGegner != 0) {
-			System.out.println("Computer | Gewinnzug " + gewinnZugGegner + " vorhanden");
+			System.out.println("Computer | Gegenspieler-Gewinnzug " + gewinnZugGegner + " vorhanden");
 			/* Verhindere den gegnerischen Zug */
 			boolean erfolg = klickeButton(gewinnZugGegner, spielfeld);
 			if(!erfolg) sucheBestenZug(spielfeld);
