@@ -10,6 +10,7 @@ public class Spieler implements Serializable {
 	private int spielerGewinne = 0;
 	private int spielerZuege = 0;
 	private boolean hatX;
+	private boolean bot = false;
 	ArrayList<Integer> feldNummern = new ArrayList<Integer>(); 
 	
 	public Spieler(String spName, boolean hatX) {
@@ -72,6 +73,10 @@ public class Spieler implements Serializable {
 		return hatX;
 	}
 	
+	/**
+	 * Fügt ein geklicktes TTTButton Feld in das Integer Array
+	 * @param feldNummer Nummer des TTTButton Felds
+	 */
 	public void addFeld(int feldNummer) {
 		feldNummern.add(feldNummer);
 	}

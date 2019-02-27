@@ -1,10 +1,13 @@
 package de.kaiandsoenmez.tictactoe.utils;
 
+import java.awt.Component;
 import java.util.ArrayList;
 
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
+import de.kaiandsoenmez.tictactoe.obj.TTTButton;
 
 public class Pruefer {
 	
@@ -39,7 +42,7 @@ public class Pruefer {
 		
 		/* Überprüfen auf Horizontale Gewinnreihenfolge */
 		for(int i = 0; i <= 2; i++) {
-			System.out.println("Prüfung auf " + pruefer1 + " & " + pruefer2 + " & " + pruefer3);
+			//System.out.println("Prüfung auf " + pruefer1 + " & " + pruefer2 + " & " + pruefer3);
 			if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
 					return true;
 			}
@@ -78,4 +81,99 @@ public class Pruefer {
 		/* Wenn kein Sieg, gebe false zurück */
 		return false;
 	}
+	
+	/**
+	 * Prüft ob der Spieler einen Gewinnzug machen kann 
+	 * @param spieler Zu überprüfendes Spieler Objekt
+	 * @return Gibt das TicTacToe Feld zurück mit dem der Spieler gewinnen kann
+	 */
+	public static int kannGewinnen(Spieler spieler) {
+		ArrayList<Integer> feldNummern = spieler.getFelder(); //Lädt die gewählten Felder eines Spielers
+		
+		/* Variablen für die Schleife der Horizontalen und Verticalen  prüfung */
+		int pruefer1 = 1;
+		int pruefer2 = 2;
+		int pruefer3 = 3;
+		
+		/* Überprüfen auf Horizontale Gewinnmöglichkeit */
+		for(int i = 0; i <= 2; i++) {
+			if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
+				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
+					return pruefer3; //Zeile wird mit 3 beendet
+				}
+				if(feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
+					return pruefer1; //Zeile wird mit 1 beendet
+				}
+				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
+					return pruefer2; //Zeile wird mit 2 beendet
+				}
+			}
+			
+			/* Zähle die Variablen hoch, Überprüfe somit die nächste Zeile */
+			pruefer1 += 3;
+			pruefer2 += 3;
+			pruefer3 += 3;
+			
+		} //ENDE For-Each
+		
+		/* Setze die Prüfer für eine neue Verticale Schleife zurück */
+		pruefer1 = 1;
+		pruefer2 = 4;
+		pruefer3 = 7;
+		
+		/* Überprüfen auf Verticale Gewinnmöglichkeit */
+		for(int i = 0; i <= 2; i++) {
+			if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
+				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
+					return pruefer3; //Zeile wird mit 3 beendet
+				}
+				if(feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
+					return pruefer1; //Zeile wird mit 1 beendet
+				}
+				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
+					return pruefer2; //Zeile wird mit 2 beendet
+				}
+			}
+			
+			/* Zähle die Variablen hoch, Überprüfe somit die nächste Zeile */
+			pruefer1 += 1;
+			pruefer2 += 1;
+			pruefer3 += 1;
+			
+		} //ENDE For-Each
+		
+		/* Wenn keine Gewinnmöglichkeit ermittelt wurde wird 0 zurück gegeben */
+		return 0;
+	}
+	
+	/**
+	 * TODO Mehr Logik
+	 * @param spieler Zu Übergebendes Spielerobjekt 
+	 * @param spielfeld Referenz auf das aktuelle Spielfeld
+	 * @return Gibt die Nummer des besten TTTButton Feldes zurück 
+	 */
+	public static int getBesterZug(Spieler spieler, JPanel spielfeld) {
+		ArrayList<Integer> feldNummern = spieler.getFelder(); //Lädt die gewählten Felder eines Spielers
+		
+		for(int i = 0; i <= 8; i++) {
+			if(pruefeTTTButton(i, spielfeld)) return i;
+		}
+		
+		return 0;
+	}
+	
+	private static boolean pruefeTTTButton(int tttButtonNummer, JPanel spielfeld) {
+		for (Component cp : spielfeld.getComponents() ){
+			TTTButton feldTTT = (TTTButton) cp; //Castet die Components auf der Spielfläche als TTTButton
+			
+			/* Wenn der Button die mitgegebene TTTNummer hat und nicht schon geklickt wurde, false zurückgeben */
+			if(feldTTT.getTTTNummer() == tttButtonNummer && feldTTT.getTTTZustand() <= 0) {
+				return true;
+			}
+		} //ENDE For-Each
+		
+		/* Wenn der Button belegt ist, gebe False zurück */
+		return false;
+	}
+	
 }

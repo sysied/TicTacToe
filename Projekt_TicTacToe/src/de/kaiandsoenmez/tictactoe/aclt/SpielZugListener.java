@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import de.kaiandsoenmez.tictactoe.obj.Bot;
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
 import de.kaiandsoenmez.tictactoe.obj.Spielstand;
 import de.kaiandsoenmez.tictactoe.obj.TTTButton;
@@ -28,9 +29,7 @@ public class SpielZugListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		/* Zu Debug Zwecken die globalen statischen Variablen im Hauptfenster ausgeben */
-		System.out.println("Der aktuelle Spieler ist " + HauptfensterUI.aktuellerSpieler.getName());
-		System.out.println("Der zweite Spieler ist " + HauptfensterUI.zweiterSpieler.getName());
-		
+		System.out.println("Spieler " + HauptfensterUI.aktuellerSpieler.getName() + " macht einen ZUG");		
 		
 		/* Speicher die 2 Spieler Objekte in der Klasse für einen Tausch nach dem Zug */
 		this.aktuellerSpieler = HauptfensterUI.aktuellerSpieler;
@@ -41,14 +40,18 @@ public class SpielZugListener implements ActionListener {
 		if(klick.getTTTZustand() <= 0) {
 			/* Das Feld */
 			if(HauptfensterUI.aktuellerSpieler.getHatX()) {
+				System.out.println("Hat X");
 				setzeX = true;
 			} else {
+				System.out.println("Hat X nicht");
 				setzeX = false;
 			}
 			
 			if(setzeX) {
+				System.out.println("Setze X auf dem Feld");
 				klick.setTTTZustand(2); //Setzt den Zustand vom Feld auf X
 			} else {
+				System.out.println("Setze O auf das Feld");
 				klick.setTTTZustand(1); //Setzt den Zustand vom Feld auf o
 			}
 			
@@ -72,10 +75,21 @@ public class SpielZugListener implements ActionListener {
 			}
 			
 			/* Ändere die Zugreihenfolge im Hauptfenster */
+			System.out.println("Hautfenster-Aktueller Spieler wird auf " + zweiterSpieler.getName() + " gestezt");
+			System.out.println("Hautfenster-Zweiter Spieler wird auf " + aktuellerSpieler.getName() + " gestezt");
+
 			HauptfensterUI.aktuellerSpieler = zweiterSpieler;
 			HauptfensterUI.zweiterSpieler = aktuellerSpieler;
 			
+			/* Informiere den benutzer über den Unentschieden Status */
 			HauptfensterUI.lblStatus.setText(zweiterSpieler.getName() + " ist am Zug! ");
+			
+			if(zweiterSpieler.getName().equals("Computer")) {
+				System.out.println("Starte Bot im Zug-Listener -----------");
+				Bot pc = new Bot(zweiterSpieler.getName(), false);
+				pc.macheZug(HauptfensterUI.spielflaeche);
+			}
+			
 			
 		} else {
 			/* Das Feld hat schon einen Wert */

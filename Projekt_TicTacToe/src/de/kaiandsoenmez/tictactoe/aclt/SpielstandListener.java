@@ -18,7 +18,7 @@ public class SpielstandListener implements ActionListener{
 	private boolean speichern = false;
 	
 	/**
-	 * Standard Konstruktor
+	 * Standard Konstruktor, übergibt boolean seichern, um diesen Listener auf 2 Buttons zu legen
 	 */
 	public SpielstandListener(boolean speichern) {
 		this.speichern = speichern;
@@ -38,8 +38,8 @@ public class SpielstandListener implements ActionListener{
 	        fcSpeicherOrt.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
 	        fcSpeicherOrt.showSaveDialog(null);
 
-	        System.out.println(fcSpeicherOrt.getCurrentDirectory());
-	        System.out.println(fcSpeicherOrt.getSelectedFile());
+	        //System.out.println(fcSpeicherOrt.getCurrentDirectory());
+	        //System.out.println(fcSpeicherOrt.getSelectedFile());
 	        
 	        speicherStand.speicherSpielstand(fcSpeicherOrt.getSelectedFile().toString());
 	        
@@ -49,9 +49,9 @@ public class SpielstandListener implements ActionListener{
 			JFileChooser standAuswahl = new JFileChooser();
 			standAuswahl.setDialogTitle("Bitte den Spielstand öffnen");
 			standAuswahl.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			FileNameExtensionFilter filter = new FileNameExtensionFilter("SER-Datei", "*.ser", "ser");
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("SER-Datei", "*.ser", "ser"); //Erlaubt nur die angegebenen Filter
 			standAuswahl.addChoosableFileFilter(filter);
-			standAuswahl.setAcceptAllFileFilterUsed(false);
+			standAuswahl.setAcceptAllFileFilterUsed(false); //Um SER-Dateien anzuzeigen
 			
 			
 	        int ergebnis;

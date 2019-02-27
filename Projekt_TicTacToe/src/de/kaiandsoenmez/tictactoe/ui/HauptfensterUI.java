@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -15,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import de.kaiandsoenmez.tictactoe.aclt.SpielStartenListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielZugListener;
+import de.kaiandsoenmez.tictactoe.aclt.SpielerAuswahlListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielstandListener;
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
 import de.kaiandsoenmez.tictactoe.obj.TTTButton;
@@ -46,6 +48,7 @@ public class HauptfensterUI extends JFrame {
 	public static JPanel spielflaeche;
 	public static JTextField ipSpieler1;
 	public static JTextField ipSpieler2;
+	public static boolean computerSpiel = false;
 	
 	/* Deklarieren von benötigten Variablen des JFrames */
 	GridLayout spielflaecheLayout = new GridLayout(3,3);
@@ -84,6 +87,12 @@ public class HauptfensterUI extends JFrame {
 		lblSpieler2.setBounds(10, 85, 150, 25);
 		lblSpieler2.setFont(new Font("Arial Black", Font.PLAIN, 16));
 
+		String spielerAuswahl[] = {"Spieler 2", "Computer" };
+		JComboBox<?> bundeslandAuswahl = new JComboBox(spielerAuswahl);
+		bundeslandAuswahl.setSelectedIndex(0);
+		bundeslandAuswahl.setBounds(10, 85, 100, 25);
+		ActionListener wahlListeer = new SpielerAuswahlListener();
+		bundeslandAuswahl.addActionListener(wahlListeer);
 		
 		ipSpieler1 = new JTextField();
 		ipSpieler1.setBounds(170, 50, 240, 25);
@@ -124,7 +133,8 @@ public class HauptfensterUI extends JFrame {
 		
 		/* Initialisierung der Objekte die auf das Spielfeld kommen 
 		 * Banamsung der Buttons: Oben Links l1, Oben Rechts r1 */
-		ActionListener szl = new SpielZugListener();
+		
+		ActionListener szl = new SpielZugListener(); //Ein ActionListener für alle Buttons auf der Spielfläche --> Klasse 'SpielZugListener'
 		TTTButton l1 = new TTTButton();
 		l1.setTTTNummer(7);
 		l1.addActionListener(szl);
@@ -158,7 +168,8 @@ public class HauptfensterUI extends JFrame {
 		getContentPane().add(lblUeberschriftSpieler);
 		getContentPane().add(trenner);
 		getContentPane().add(lblSpieler1);
-		getContentPane().add(lblSpieler2);
+		//getContentPane().add(lblSpieler2);
+		getContentPane().add(bundeslandAuswahl);
 		getContentPane().add(ipSpieler1);
 		getContentPane().add(ipSpieler2);
 		getContentPane().add(btnStartSpiel);

@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.swing.JTextField;
 
+import de.kaiandsoenmez.tictactoe.obj.Bot;
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
 import de.kaiandsoenmez.tictactoe.ui.HauptfensterUI;
 import de.kaiandsoenmez.tictactoe.utils.Debug;
@@ -32,7 +33,7 @@ public class SpielStartenListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		/* Überprüfen ob beide Speieler eingegeben wurden */
 		if(Pruefer.pruefeInputText(i1) && Pruefer.pruefeInputText(i2)) {
-			
+			System.out.println("Spiel Starten Listener ----");
 			/* Erstelle die beiden Spieler */
 			Spieler ersterSpieler = null;
 			Spieler zweiterSpieler = null;
@@ -60,8 +61,17 @@ public class SpielStartenListener implements ActionListener {
 			HauptfensterUI.aktuellerSpieler = ersterSpieler;
 			HauptfensterUI.zweiterSpieler = zweiterSpieler;
 			
-			/* Aktiviert die Spielfläche und erlaubt die EIngabe */
-			HauptfensterUI.enableSpielflaeche();
+			if(HauptfensterUI.aktuellerSpieler.getName().equals("Computer")) {
+				System.out.println("Computer ist der aktuelle Spieler");
+				System.out.println("Computer macht Zug");
+				Bot pc = new Bot(ersterSpieler.getName(), true);
+				pc.macheZug(HauptfensterUI.spielflaeche);
+			} else {
+				/* Aktiviert die Spielfläche und erlaubt die EIngabe */
+				HauptfensterUI.enableSpielflaeche();
+				System.out.println("Benutzer startet das Spiel");
+				
+			}
 			
 		} else {
 			/* Werfe eine Fehlermeldung, die dem Benutzer signalisiert, dass kein Text für den Spieler eingegeben wurde */
