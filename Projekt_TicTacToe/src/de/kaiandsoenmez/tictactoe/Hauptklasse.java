@@ -9,10 +9,11 @@ public class Hauptklasse {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		/* Initialisiert das Hauptfenster */
 		HauptfensterUI fenster = new HauptfensterUI(); //Erstellt ein Fenster Objekt 
 		fenster.setVisible(true); //Macht das Fenster sichtbar
-		System.out.println("Starte das Spielefenster");
+		System.out.println("Starte das Spielefenster"); //Für DEBUG Zwecke
 		
 	}
 

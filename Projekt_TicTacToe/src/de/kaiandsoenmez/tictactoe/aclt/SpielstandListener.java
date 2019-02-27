@@ -71,7 +71,10 @@ public class SpielstandListener implements ActionListener{
 	            HauptfensterUI.aktuellerSpieler = ladeStand.getAktuellerSpieler();
 	            HauptfensterUI.zweiterSpieler = ladeStand.getZweiterSpieler();
 	            
+	            /* Setzt das UI auf ein laufendes Spiel */
 	            HauptfensterUI.lblStatus.setText("Der Spieler " + ladeStand.getAktuellerSpieler().getName() + " ist am Zug");
+	            HauptfensterUI.laufendesSpiel = true;
+	            HauptfensterUI.btnStartSpiel.setText("Spiel beenden");
 	        }
 		}
 	}

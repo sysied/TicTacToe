@@ -8,6 +8,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -35,22 +38,23 @@ import javax.swing.JSeparator;
  * @author ksönmez, kleikam
  *
  */
-public class HauptfensterUI extends JFrame {
+public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konstruktor nicht immer frame mit angeben muss
 
 	/**
 	 * Deklarieren der globalen Variablen die von andereb Klassen aufgerufen werden
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static Spieler aktuellerSpieler = null;
-	public static Spieler zweiterSpieler = null;
-	public static Label lblStatus;
-	public static JPanel spielflaeche;
-	public static JTextField ipSpieler1;
-	public static JTextField ipSpieler2;
-	public static JComboBox<?> auswahl;
-	public static boolean computerSpiel = false;
-	public static boolean laufendesSpiel = false;
+	public static Spieler aktuellerSpieler = null; //Um von anderen Klassen den aktuellenSpieler zu erkennen
+	public static Spieler zweiterSpieler = null;   //Um von anderen Klassen den nächsten Spieler zu erkennen
+	public static Label lblStatus; //Um dem Benutzer durch andere Klassen den Status anzuzeigen
+	public static JPanel spielflaeche; //Um global auf das Spielfeld zuzugreiefn
+	public static JTextField ipSpieler1; //Um global auf den Spieler 1 zuzugreifen
+	public static JTextField ipSpieler2; //Um global auf den Spieler 2 zuzugreifen
+	public static JButton btnStartSpiel; //Um den Text global auf #Starten# und #beenden# zu setzen 
+	public static JComboBox<?> auswahl; //Um die aktuelle Auswahl der omboBox zu erkennen
+	public static boolean computerSpiel = false; //Um zu erkennen ob das aktuelle Spiel ein Bot Spiel ist
+	public static boolean laufendesSpiel = false; //Um zu erkennen ob ein Spiel läuft 
 	
 	/* Deklarieren von benötigten Variablen des JFrames */
 	GridLayout spielflaecheLayout = new GridLayout(3,3);
@@ -65,8 +69,8 @@ public class HauptfensterUI extends JFrame {
 		/* Eigenschaften des Fensters setzen */
 		setResizable(false);
 		//setAlwaysOnTop(true);
-		setTitle("TicTacToe");
-		setBounds(100, 100, 455, 555);
+		setTitle("TicTacToe"); //Setzt den Titel des JFrame
+		setBounds(100, 100, 455, 575);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.WHITE);
@@ -78,7 +82,7 @@ public class HauptfensterUI extends JFrame {
 		lblUeberschriftSpieler.setBounds(10, 10, 430, 20);
 		lblUeberschriftSpieler.setFont(new Font("Arial Black", Font.BOLD, 20));
 		
-		JSeparator trenner = new JSeparator();
+		JSeparator trenner = new JSeparator(); //Ein Trenner für einen schönen Unterstrich
 		trenner.setBounds(10, 35, 430, 2);
 		
 		Label lblSpieler1 = new Label("Spieler 1:");
@@ -89,24 +93,24 @@ public class HauptfensterUI extends JFrame {
 		lblSpieler2.setBounds(10, 85, 150, 25);
 		lblSpieler2.setFont(new Font("Arial Black", Font.PLAIN, 16));
 
-		String spielerAuswahl[] = {"Spieler 2", "Computer" };
+		String spielerAuswahl[] = {"Spieler 2", "Computer" }; //Optionen der ComboBox
 		auswahl = new JComboBox(spielerAuswahl);
 		auswahl.setSelectedIndex(0);
 		auswahl.setBounds(10, 85, 100, 25);
 		ActionListener wahlListeer = new SpielerAuswahlListener();
 		auswahl.addActionListener(wahlListeer);
 		
-		ipSpieler1 = new JTextField();
+		ipSpieler1 = new JTextField(); //Eingabefeld Spieler 1
 		ipSpieler1.setBounds(170, 50, 240, 25);
 		
-		ipSpieler2 = new JTextField();
+		ipSpieler2 = new JTextField(); //Eingabefeld Spieler 2
 		ipSpieler2.setBounds(170, 85, 240, 25);
 		
 		lblStatus = new Label();
 		lblStatus.setAlignment(Label.CENTER);
 		lblStatus.setBounds(10,150, 429, 24);
 		
-		JButton btnStartSpiel = new JButton();
+		btnStartSpiel = new JButton();
 		btnStartSpiel.setText("Spiel starten");
 		btnStartSpiel.setBounds(170, 120, 240, 25);
 		ActionListener startenListener = new SpielStartenListener(ipSpieler1, ipSpieler2);
@@ -124,6 +128,13 @@ public class HauptfensterUI extends JFrame {
 		ActionListener ladeStand = new SpielstandListener(false);
 		btnLadeStand.addActionListener(ladeStand);
 		
+		/* Erstelle ein Menü für eigene Skins */
+		JMenuBar menuLeiste = new JMenuBar();
+        JMenu menu = new JMenu("Optionen"); //Erstellt einen Menüpunkt namens Optionen
+        JMenuItem skinAendern = new JMenuItem("Symbole anpassen"); //Erstellt einen Unterprunkt
+        menu.add(skinAendern);
+        menuLeiste.add(menu);
+	    setJMenuBar(menuLeiste); //Setzt das menu zu dem JFrame
 		
 		spielflaeche = new JPanel();
 		spielflaeche.setBounds(10, 180, 430, 310);
@@ -179,6 +190,7 @@ public class HauptfensterUI extends JFrame {
 		getContentPane().add(lblStatus);
 		getContentPane().add(btnSpeicherStand);
 		getContentPane().add(btnLadeStand);
+		//getContentPane().
 		/* ENDE Platzieren der Objekte auf dem Frame*/
 		
 		/* Platzieren der Objekte im Spielfeld */
