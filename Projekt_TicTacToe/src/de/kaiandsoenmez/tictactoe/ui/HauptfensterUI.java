@@ -17,6 +17,7 @@ import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
+import de.kaiandsoenmez.tictactoe.aclt.MenuSymboleListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielStartenListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielZugListener;
 import de.kaiandsoenmez.tictactoe.aclt.SpielerAuswahlListener;
@@ -35,7 +36,7 @@ import javax.swing.JSeparator;
 
 /**
  * Diese Klasse ist für die Hauptsächliche Anzeige der des UI's zuständig 
- * @author ksönmez, kleikam
+ * @author kleikam mit Überarbeitung von ksönmez
  *
  */
 public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konstruktor nicht immer frame mit angeben muss
@@ -129,9 +130,11 @@ public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konst
 		btnLadeStand.addActionListener(ladeStand);
 		
 		/* Erstelle ein Menü für eigene Skins */
+		ActionListener einstListener = new MenuSymboleListener();
 		JMenuBar menuLeiste = new JMenuBar();
         JMenu menu = new JMenu("Optionen"); //Erstellt einen Menüpunkt namens Optionen
         JMenuItem skinAendern = new JMenuItem("Symbole anpassen"); //Erstellt einen Unterprunkt
+        skinAendern.addActionListener(einstListener);
         menu.add(skinAendern);
         menuLeiste.add(menu);
 	    setJMenuBar(menuLeiste); //Setzt das menu zu dem JFrame

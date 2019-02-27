@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 
 import de.kaiandsoenmez.tictactoe.obj.Spieler;
 import de.kaiandsoenmez.tictactoe.obj.TTTButton;
+import de.kaiandsoenmez.tictactoe.ui.HauptfensterUI;
 
 public class Pruefer {
 	
@@ -97,6 +98,18 @@ public class Pruefer {
 		System.out.println("-------------------");
 		
 		
+		/* Prüfe auf Diagonale Gewinne */
+		if(feldNummern.contains(1) && feldNummern.contains(5)) {
+			return 9; //Zeile wird mit 9 beendet
+		}
+		if(feldNummern.contains(1) && feldNummern.contains(9)) {
+			return 5; //Zeile wird mit 5 beendet
+		}
+		if(feldNummern.contains(9) && feldNummern.contains(5)) {
+			return 1; //Zeile wird mit 1 beendet
+		}
+		
+		
 		/* Variablen für die Schleife der Horizontalen und Verticalen  prüfung */
 		int pruefer1 = 1;
 		int pruefer2 = 2;
@@ -107,13 +120,14 @@ public class Pruefer {
 		//	if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
 				System.out.println("Prüfung ");
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
-					return pruefer3; //Zeile wird mit 3 beendet
+					if(pruefeTTTButton(pruefer3, HauptfensterUI.spielflaeche)) return pruefer3; //Zeile wird mit 3 beendet
+					
 				}
 				if(feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
-					return pruefer1; //Zeile wird mit 1 beendet
+					if(pruefeTTTButton(pruefer1, HauptfensterUI.spielflaeche)) return pruefer1; //Zeile wird mit 1 beendet
 				}
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
-					return pruefer2; //Zeile wird mit 2 beendet
+					if(pruefeTTTButton(pruefer2, HauptfensterUI.spielflaeche)) return pruefer2; //Zeile wird mit 2 beendet
 				}
 		//	}
 			
@@ -133,13 +147,13 @@ public class Pruefer {
 		for(int i = 0; i <= 2; i++) {
 			//if(feldNummern.contains(pruefer1) || feldNummern.contains(pruefer2) || feldNummern.contains(pruefer3)) {
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer2)) {
-					return pruefer3; //Zeile wird mit 3 beendet
+					if(pruefeTTTButton(pruefer3, HauptfensterUI.spielflaeche)) return pruefer3; //Zeile wird mit 2 beendet
 				}
 				if(feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
-					return pruefer1; //Zeile wird mit 1 beendet
+					if(pruefeTTTButton(pruefer1, HauptfensterUI.spielflaeche)) return pruefer1; //Zeile wird mit 2 beendet
 				}
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
-					return pruefer2; //Zeile wird mit 2 beendet
+					if(pruefeTTTButton(pruefer2, HauptfensterUI.spielflaeche)) return pruefer2; //Zeile wird mit 2 beendet
 				}
 		//	}
 			
@@ -150,16 +164,6 @@ public class Pruefer {
 			
 		} //ENDE For-Each
 		
-		/* Prüfe auf Diagonale Gewinne */
-		if(feldNummern.contains(1) && feldNummern.contains(5)) {
-			return 9; //Zeile wird mit 3 beendet
-		}
-		if(feldNummern.contains(1) && feldNummern.contains(9)) {
-			return 5; //Zeile wird mit 3 beendet
-		}
-		if(feldNummern.contains(9) && feldNummern.contains(5)) {
-			return 1; //Zeile wird mit 3 beendet
-		}
 		
 		
 		/* Wenn keine Gewinnmöglichkeit ermittelt wurde wird 0 zurück gegeben */
