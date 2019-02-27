@@ -11,6 +11,7 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 import de.kaiandsoenmez.tictactoe.obj.Spielstand;
 import de.kaiandsoenmez.tictactoe.ui.HauptfensterUI;
+import de.kaiandsoenmez.tictactoe.utils.Debug;
 
 public class SpielstandListener implements ActionListener{
 
@@ -46,6 +47,10 @@ public class SpielstandListener implements ActionListener{
 	        
 		} else {
 			/* Lade den Spielstand */
+			if(HauptfensterUI.computerSpiel) {
+				Debug.fehlermeldung("Computerspiele können nicht gespeichert werden!");
+				return;
+			}
 			JFileChooser standAuswahl = new JFileChooser();
 			standAuswahl.setDialogTitle("Bitte den Spielstand öffnen");
 			standAuswahl.setFileSelectionMode(JFileChooser.FILES_ONLY);
