@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import de.kaiandsoenmez.tictactoe.aclt.SpielerAuswahlListener;
 import de.kaiandsoenmez.tictactoe.ui.HauptfensterUI;
+import de.kaiandsoenmez.tictactoe.utils.Debug;
 import de.kaiandsoenmez.tictactoe.utils.Pruefer;
 
 public class Bot {
@@ -28,6 +29,13 @@ public class Bot {
 	 * Das JPanel ist die aktuelle Referenz auf das Fahrwerk
 	 */
 	public void macheZug(JPanel spielfeld) {
+		try {
+			/* Lasse den Bot nachdenken */
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			Debug.fehlermeldung(e.getMessage());
+		}
+		
 		System.out.println("Computer ist am ZUG");
 		/* 1. Auf eigenen Siegzug prüfen */
 		int gewinnZug = Pruefer.kannGewinnen(HauptfensterUI.aktuellerSpieler);
@@ -52,6 +60,7 @@ public class Bot {
 		}
 		
 		/* 3. Mache einen Zug */
+		System.out.println("Mache einen normalen Zug");
 		sucheBestenZug(spielfeld);
 	}
 	
