@@ -185,6 +185,12 @@ public class Pruefer {
 		return 0;
 	}
 	
+	/**
+	 * Prüft den Button ob der auf der Spielfläche geklickt wurde 
+	 * @param tttButtonNummer
+	 * @param spielfeld
+	 * @return
+	 */
 	private static boolean pruefeTTTButton(int tttButtonNummer, JPanel spielfeld) {
 		for (Component cp : spielfeld.getComponents() ){
 			TTTButton feldTTT = (TTTButton) cp; //Castet die Components auf der Spielfläche als TTTButton
