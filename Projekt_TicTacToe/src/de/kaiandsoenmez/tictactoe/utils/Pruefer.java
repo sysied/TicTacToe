@@ -124,6 +124,7 @@ public class Pruefer {
 					
 				}
 				if(feldNummern.contains(pruefer2) && feldNummern.contains(pruefer3)) {
+					System.out.println("");
 					if(pruefeTTTButton(pruefer1, HauptfensterUI.spielflaeche)) return pruefer1; //Zeile wird mit 1 beendet
 				}
 				if(feldNummern.contains(pruefer1) && feldNummern.contains(pruefer3)) {
@@ -178,7 +179,7 @@ public class Pruefer {
 	 */
 	public static int getBesterZug(Spieler spieler, JPanel spielfeld) {
 		/* Gehe über jedes Feld und suche die leeren Felder */
-		for(int i = 0; i <= 8; i++) {
+		for(int i = 0; i <= 9; i++) {
 			if(pruefeTTTButton(i, spielfeld)) return i;
 		}
 		
@@ -192,11 +193,13 @@ public class Pruefer {
 	 * @return
 	 */
 	private static boolean pruefeTTTButton(int tttButtonNummer, JPanel spielfeld) {
+		System.out.println("Prüfe auf TTTKlick bei Feld " + tttButtonNummer);
 		for (Component cp : spielfeld.getComponents() ){
 			TTTButton feldTTT = (TTTButton) cp; //Castet die Components auf der Spielfläche als TTTButton
 			
 			/* Wenn der Button die mitgegebene TTTNummer hat und nicht schon geklickt wurde, false zurückgeben */
 			if(feldTTT.getTTTNummer() == tttButtonNummer && feldTTT.getTTTZustand() <= 0) {
+				System.out.println("Feld " + tttButtonNummer + " ist frei TRUE");
 				return true;
 			}
 		} //ENDE For-Each
