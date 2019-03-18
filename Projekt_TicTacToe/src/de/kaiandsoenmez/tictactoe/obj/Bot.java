@@ -29,12 +29,6 @@ public class Bot {
 	 * Das JPanel ist die aktuelle Referenz auf das Fahrwerk
 	 */
 	public void macheZug(JPanel spielfeld) {
-		try {
-			/* Lasse den Bot nachdenken */
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			Debug.fehlermeldung(e.getMessage());
-		}
 		
 		System.out.println("Computer ist am ZUG");
 		/* 1. Auf eigenen Siegzug prüfen */

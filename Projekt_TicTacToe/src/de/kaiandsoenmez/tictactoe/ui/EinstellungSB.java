@@ -12,7 +12,7 @@ public class EinstellungSB extends JFrame {
 		//setAlwaysOnTop(true);
 		setTitle("Einstellungen"); //Setzt den Titel des JFrame
 		setBounds(100, 100, 120, 120);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.WHITE);
 		/* ENDE Eigenschaften setzen */

@@ -86,6 +86,15 @@ public class SpielZugListener implements ActionListener {
 			/* Wenn der Computer als nächstes am Zug ist */
 			if(zweiterSpieler.getName().equals("Computer")) {
 				Bot pc = new Bot(zweiterSpieler.getName(), false);
+				
+				try {
+					/* Lasse den Bot nachdenken */
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					Debug.fehlermeldung(e1.getMessage());
+				}
+				
+				
 				pc.macheZug(HauptfensterUI.spielflaeche);
 			}
 			

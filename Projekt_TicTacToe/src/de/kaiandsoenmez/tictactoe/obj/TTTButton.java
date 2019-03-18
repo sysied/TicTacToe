@@ -15,19 +15,19 @@ public class TTTButton extends JButton {
 	public TTTButton(String text) {
 		super(text);
 		
-		this.setOpaque(false);
-		this.setContentAreaFilled(false);
-		this.setBorderPainted(true);
-		this.setFocusPainted(false);
+		setOpaque(false);
+		setContentAreaFilled(false);
+		setBorderPainted(true);
+		setFocusPainted(false);
 	}
 	
 	public TTTButton() {
 		super();
 		
-		this.setOpaque(false);
-		this.setContentAreaFilled(false);
-		this.setBorderPainted(true);
-		this.setFocusPainted(false);
+		setOpaque(false);
+		setContentAreaFilled(false);
+		setBorderPainted(true);
+		setFocusPainted(false);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class TTTButton extends JButton {
 	}
 	
 	/**
-	 * 
+	 * Gibt den TTTzZustand zurück
 	 * @return
 	 */
 	public int getTTTZustand() {

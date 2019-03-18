@@ -52,7 +52,7 @@ public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konst
 	public static JPanel spielflaeche; //Um global auf das Spielfeld zuzugreiefn
 	public static JTextField ipSpieler1; //Um global auf den Spieler 1 zuzugreifen
 	public static JTextField ipSpieler2; //Um global auf den Spieler 2 zuzugreifen
-	public static JButton btnStartSpiel; //Um den Text global auf #Starten# und #beenden# zu setzen 
+	public static JButton btnStartSpiel; //Um den Text global auf #Starten# und #Beenden# zu setzen 
 	public static JComboBox<?> auswahl; //Um die aktuelle Auswahl der omboBox zu erkennen
 	public static boolean computerSpiel = false; //Um zu erkennen ob das aktuelle Spiel ein Bot Spiel ist
 	public static boolean laufendesSpiel = false; //Um zu erkennen ob ein Spiel läuft 
@@ -73,7 +73,7 @@ public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konst
 		setTitle("TicTacToe"); //Setzt den Titel des JFrame
 		setBounds(100, 100, 455, 575);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(null); //Entfernt das Layout und ermöglicht freie Platzierung
 		getContentPane().setBackground(Color.WHITE);
 		/* ENDE Eigenschaften setzen */
 	
@@ -107,23 +107,23 @@ public class HauptfensterUI extends JFrame { //Extends JFrame damit man im Konst
 		ipSpieler2 = new JTextField(); //Eingabefeld Spieler 2
 		ipSpieler2.setBounds(170, 85, 240, 25);
 		
-		lblStatus = new Label();
+		lblStatus = new Label(); //Für die Anzeige welcher Spieler am Zug ist
 		lblStatus.setAlignment(Label.CENTER);
 		lblStatus.setBounds(10,150, 429, 24);
 		
-		btnStartSpiel = new JButton();
+		btnStartSpiel = new JButton(); //Um das Spiel zu starten und zu beenden
 		btnStartSpiel.setText("Spiel starten");
 		btnStartSpiel.setBounds(170, 120, 240, 25);
 		ActionListener startenListener = new SpielStartenListener(ipSpieler1, ipSpieler2);
 		btnStartSpiel.addActionListener(startenListener);
 		
-		JButton btnSpeicherStand = new JButton();
+		JButton btnSpeicherStand = new JButton(); //Um den Spielstand zu speichern
 		btnSpeicherStand.setText("Spiel speichern");
 		btnSpeicherStand.setBounds(10, 495, 150, 25);
 		ActionListener speicherStand = new SpielstandListener(true);
 		btnSpeicherStand.addActionListener(speicherStand);
 		
-		JButton btnLadeStand = new JButton();
+		JButton btnLadeStand = new JButton(); //Um den Spielstand zu laden 
 		btnLadeStand.setText("Spiel laden");
 		btnLadeStand.setBounds(290, 495, 150, 25);
 		ActionListener ladeStand = new SpielstandListener(false);

@@ -110,7 +110,7 @@ public class Pruefer {
 		}
 		
 		
-		/* Variablen für die Schleife der Horizontalen und Verticalen  prüfung */
+		/* Variablen für die Schleife der Horizontalen und Vertikalen  prüfung */
 		int pruefer1 = 1;
 		int pruefer2 = 2;
 		int pruefer3 = 3;

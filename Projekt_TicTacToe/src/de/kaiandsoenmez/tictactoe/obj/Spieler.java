@@ -10,7 +10,6 @@ public class Spieler implements Serializable {
 	private int spielerGewinne = 0;
 	private int spielerZuege = 0;
 	private boolean hatX;
-	private boolean bot = false;
 	ArrayList<Integer> feldNummern = new ArrayList<Integer>(); 
 	
 	public Spieler(String spName, boolean hatX) {
